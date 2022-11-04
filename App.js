@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screens/home/Home';
+import WhatsApp from './screens/whatsapp/WhatsApp';
+import { NativeBaseProvider } from "native-base";
 
+const screen = createNativeStackNavigator()
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <screen.Navigator initialRouteName='home'>
+          <screen.Screen name='home' component={Home} options={{ title: '' }} />
+          <screen.Screen name='whatsapp' component={WhatsApp} options={{ title: '' }} />
+        </screen.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
